@@ -14,7 +14,7 @@ class NoInternet extends StatelessWidget {
         height: deviceSize.height,
         width: deviceSize.width,
         alignment: Alignment.center,
-        child: Text('No Internet Connection'),
+        child: const Text('No Internet Connection'),
       ),
       bottomNavigationBar: AppButton(name: "Retry", onTap: (){
         Navigator.pushReplacementNamed(context, '/');

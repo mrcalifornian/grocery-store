@@ -38,7 +38,7 @@ class _ExclusiveItemsState extends State<ExclusiveItems> {
                       scrollDirection: Axis.horizontal,
                       itemCount: 4,
                       itemBuilder: (context, index) {
-                        return ProductShimmer();
+                        return const ProductShimmer();
                       })
                       : ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 10),

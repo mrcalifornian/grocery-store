@@ -32,7 +32,7 @@ class BestSellingItems extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: 4,
                       itemBuilder: (context, index) {
-                        return ProductShimmer();
+                        return const ProductShimmer();
                       })
                       : ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 10),

@@ -31,7 +31,7 @@ class ProductItem extends StatelessWidget {
     final cart = Provider.of<CartProvider>(context, listen: false);
     return Container(
       margin: EdgeInsets.all(margin),
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: 15,
         right: 15,
         bottom: 10,
@@ -70,7 +70,7 @@ class ProductItem extends StatelessWidget {
             ),
           ),
           Text(
-            "${measure}, Price",
+            "$measure, Price",
             style: const TextStyle(color: Colors.black54),
           ),
           const Spacer(),
@@ -78,7 +78,7 @@ class ProductItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "\$${price}",
+                "\$$price",
                 style: const TextStyle(
                   fontSize: 17,
                 ),

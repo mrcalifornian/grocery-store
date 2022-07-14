@@ -15,7 +15,7 @@ class CartIcon extends StatelessWidget {
       // Navigator.pushNamed(context, CartPage.routeName);
     }, icon: Stack(
       children: [
-        Icon(Icons.shopping_cart_outlined, size: 25,),
+        const Icon(Icons.shopping_cart_outlined, size: 25,),
         Positioned(
           top: -1,
           right: -1,
@@ -28,7 +28,7 @@ class CartIcon extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: AppColors.mainGreen,
             ),
-            child: Text('${Provider.of<CartProvider>(context).cartItems.length}', style: TextStyle(
+            child: Text('${Provider.of<CartProvider>(context).cartItems.length}', style: const TextStyle(
               color: Colors.white,
             ),),
           ),

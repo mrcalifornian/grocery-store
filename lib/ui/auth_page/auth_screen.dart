@@ -174,6 +174,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                 if (value != passwordController.text) {
                                   return 'Passwords do not match!';
                                 }
+                                return null;
                               }
                             : null,
                       ),
@@ -196,7 +197,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       onTap: submit,
                       horPadding: 0,
                     ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               authMode == AuthState.logIn
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,

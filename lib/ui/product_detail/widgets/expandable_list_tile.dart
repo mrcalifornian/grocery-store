@@ -28,18 +28,18 @@ class _ExpandableWidgetState extends State<ExpandableWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 5,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.black38,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           GestureDetector(
@@ -50,11 +50,11 @@ class _ExpandableWidgetState extends State<ExpandableWidget> {
                 children: [
                   Text(
                     widget.sectionTitle,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   widget.trailing,
                       Icon(
                         _isExpanded ? Icons.expand_less : Icons.expand_more,
@@ -66,8 +66,8 @@ class _ExpandableWidgetState extends State<ExpandableWidget> {
           ),
           if(_isExpanded)
           Text(
-            "${widget.description}",
-            style: TextStyle(color: Colors.black54, fontSize: 16),
+            widget.description,
+            style: const TextStyle(color: Colors.black54, fontSize: 16),
           ),
         ],
       ),

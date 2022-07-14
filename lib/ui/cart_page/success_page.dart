@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../orders_page/orders_page.dart';
@@ -26,16 +25,16 @@ class SuccessPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/tick.png'),
-            SizedBox(height: 20,),
-            Text(
+            const SizedBox(height: 20,),
+            const Text(
               'Your Order has been accepted',
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 23,
               ),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             AppButton(
                 height: 60,
                 verPaddding: 5,

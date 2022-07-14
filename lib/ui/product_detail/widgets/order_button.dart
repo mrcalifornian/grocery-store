@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/ui/cart_page/cart_page.dart';
 import 'package:grocery_store/ui/cart_page/success_page.dart';
-import 'package:grocery_store/ui/orders_page/orders_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app_constants/app_colors.dart';
@@ -31,10 +29,10 @@ class _CartButtonState extends State<CartButton> {
           title: Image.asset(
               'assets/images/bag.png'
           ),
-          content: Text(
+          content: const Text(
                 'Oops! Order Failed',
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 23,
             ),

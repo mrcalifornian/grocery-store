@@ -49,7 +49,7 @@ class CartWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${measure}, Price",
+                    "$measure, Price",
                     style: const TextStyle(color: Colors.black54),
                   ),
                   const SizedBox(
@@ -76,7 +76,7 @@ class CartWidget extends StatelessWidget {
                         ),
                         height: 40,
                         width: 40,
-                        child: Text("${quantity}",
+                        child: Text("$quantity",
                             style: const TextStyle(
                               fontSize: 18,
                             )),

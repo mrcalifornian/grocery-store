@@ -34,7 +34,7 @@ class _ExplorePageState extends State<ExplorePage> {
       setState(() {
         _isLoading = false;
       });
-    }).catchError((error){
+    }).catchError((error) {
       setState(() {
         _error = true;
         _isLoading = false;
@@ -113,133 +113,148 @@ class _ExplorePageState extends State<ExplorePage> {
         ),
       ),
       body: _error
-          ? Center(
-        child: Text('Something went wrong!'),
-      )
-          :Stack(
-        children: [
-          _isLoading
-              ? GridView.builder(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 70,
-                    bottom: 20,
-                  ),
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: 6,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 15,
-                    mainAxisExtent: 195,
-                  ),
-                  itemBuilder: (context, index) {
-                    return CategoryShimmer(
-                        backgroundColor: _boxColor(index + 1));
-                  })
-              : GridView.builder(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 70,
-                    bottom: 20,
-                  ),
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: prod.categories.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 15,
-                    mainAxisExtent: 195,
-                  ),
-                  itemBuilder: (context, index) {
-                    final CategoryModel product = prod.categories[index];
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, GridviewPage.routeName,
-                            arguments: GridPageModel(
-                                title: product.title,
-                                products: product.products));
-                      },
-                      child: CategoryItem(
-                        imageUrl: product.imageUrl,
-                        title: product.title,
-                        borderColor: _borderColor(index + 1),
-                        backgroundColor: _boxColor(index + 1),
-                      ),
-                    );
-                  },
-                ),
-          if(_isTyping)
-          ListView.builder(
-            padding: const EdgeInsets.only(
-              top: 60,
-              left: 20,
-              right: 20,
-              // bottom: 10,
-            ),
-              itemCount: prod.searchedProducts.length,
-              itemBuilder: (context, index) {
-                final item = prod.searchedProducts[index];
-                return Container(
-                  padding: const EdgeInsets.only(top: 5, bottom: 5,),
-                  color: Colors.white,
-                  child: ListTile(
-                    onTap: (){
-                      Navigator.pushNamed(context, ProductDetailScreen.routeName, arguments: item);
-                    },
-                    leading: Image.network(item.imageUrl, height: 50, width: 50,),
-                    title: Text(
-                        item.title,
-                        style: const TextStyle(
-                      fontSize: 20,
-                    )),
-                    trailing: const Icon(Icons.call_made, size: 20,),
-                  ),
-                );
-              }),
-          Container(
-            color: Colors.white,
-            height: 60,
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
-            child: TextField(
-              keyboardType: TextInputType.text,
-              controller: _searchText,
-              onTap: () => prod.addProduct(),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none),
-                filled: true,
-                fillColor: AppColors.searchBarColor,
-                hintText: "Search Store",
-                suffixIcon: _isTyping
-                    ? IconButton(
-                        onPressed: () {
-                          prod.emptyList();
-                          _searchText.clear();
-                          _isTyping = false;
+          ? const Center(
+              child: Text('Something went wrong!'),
+            )
+          : Stack(
+              children: [
+                _isLoading
+                    ? GridView.builder(
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          top: 70,
+                          bottom: 20,
+                        ),
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: 6,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 15,
+                          crossAxisSpacing: 15,
+                          mainAxisExtent: 195,
+                        ),
+                        itemBuilder: (context, index) {
+                          return CategoryShimmer(
+                              backgroundColor: _boxColor(index + 1));
+                        })
+                    : GridView.builder(
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          top: 70,
+                          bottom: 20,
+                        ),
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: prod.categories.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 15,
+                          crossAxisSpacing: 15,
+                          mainAxisExtent: 195,
+                        ),
+                        itemBuilder: (context, index) {
+                          final CategoryModel product = prod.categories[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, GridviewPage.routeName,
+                                  arguments: GridPageModel(
+                                      title: product.title,
+                                      products: product.products));
+                            },
+                            child: CategoryItem(
+                              imageUrl: product.imageUrl,
+                              title: product.title,
+                              borderColor: _borderColor(index + 1),
+                              backgroundColor: _boxColor(index + 1),
+                            ),
+                          );
                         },
-                        icon: const Icon(Icons.clear))
-                    : const Icon(
-                        Icons.search,
-                        color: Colors.black,
                       ),
-              ),
-              cursorColor: Colors.black,
-              // onEditingComplete: () {
-              //   prod.searchProducts(_searchText.text);
-              // },
-              onSubmitted: (value) {
-                prod.searchProducts(value);
-              },
-              textInputAction: TextInputAction.done,
-              // onSubmitted: (){},
+                if (_isTyping)
+                  ListView.builder(
+                      padding: const EdgeInsets.only(
+                        top: 60,
+                        left: 20,
+                        right: 20,
+                        // bottom: 10,
+                      ),
+                      itemCount: prod.searchedProducts.length,
+                      itemBuilder: (context, index) {
+                        final item = prod.searchedProducts[index];
+                        return Container(
+                          padding: const EdgeInsets.only(
+                            top: 5,
+                            bottom: 5,
+                          ),
+                          color: Colors.white,
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, ProductDetailScreen.routeName,
+                                  arguments: item);
+                            },
+                            leading: Image.network(
+                              item.imageUrl,
+                              height: 50,
+                              width: 50,
+                            ),
+                            title: Text(item.title,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                )),
+                            trailing: const Icon(
+                              Icons.call_made,
+                              size: 20,
+                            ),
+                          ),
+                        );
+                      }),
+                Container(
+                  color: Colors.white,
+                  height: 60,
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 5),
+                  child: TextField(
+                    keyboardType: TextInputType.text,
+                    controller: _searchText,
+                    onTap: () => prod.addProduct(),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none),
+                      filled: true,
+                      fillColor: AppColors.searchBarColor,
+                      hintText: "Search Store",
+                      suffixIcon: _isTyping
+                          ? IconButton(
+                              onPressed: () {
+                                prod.emptyList();
+                                _searchText.clear();
+                                _isTyping = false;
+                              },
+                              icon: const Icon(Icons.clear))
+                          : const Icon(
+                              Icons.search,
+                              color: Colors.black,
+                            ),
+                    ),
+                    cursorColor: Colors.black,
+                    // onEditingComplete: () {
+                    //   prod.searchProducts(_searchText.text);
+                    // },
+                    onSubmitted: (value) {
+                      prod.searchProducts(value);
+                    },
+                    textInputAction: TextInputAction.done,
+                    // onSubmitted: (){},
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

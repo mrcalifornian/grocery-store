@@ -31,7 +31,7 @@ class _OrderWidgetState extends State<OrderWidget> {
             child: ListTile(
               title: Text(
                 "\$ ${(widget.amount).toStringAsFixed(2)}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                 ),
@@ -45,20 +45,20 @@ class _OrderWidgetState extends State<OrderWidget> {
           ),
           if(_isExpanded)
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               height: widget.products.length*20+20.0,
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: widget.products.length,
                 itemBuilder: (context, index){
                   final order = widget.products[index];
                   return Row(
                     children: [
-                      Text(order.title, style: TextStyle(
+                      Text(order.title, style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),),
-                      Spacer(),
-                      Text("${order.quantity} x ${order.price}", style: TextStyle(
+                      const Spacer(),
+                      Text("${order.quantity} x ${order.price}", style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),)
                     ],

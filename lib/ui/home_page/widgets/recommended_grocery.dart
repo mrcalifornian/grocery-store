@@ -40,7 +40,7 @@ class RecommendedGrocery extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: 4,
                           itemBuilder: (context, index) {
-                            return ProductShimmer();
+                            return const ProductShimmer();
                           })
                           : ListView.builder(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -71,8 +71,8 @@ class RecommendedGrocery extends StatelessWidget {
                 itemCount: 2,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     height: 90,
                     width: 200,
                     decoration: BoxDecoration(

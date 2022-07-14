@@ -49,12 +49,12 @@ class OrdersPage extends StatelessWidget {
                           baseColor: Colors.white,
                           highlightColor: Colors.grey,
                           child: Container(
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                               horizontal: 10,
                               vertical: 5,
                             ),
                             height: 70,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.white,
                             ),
                           ));

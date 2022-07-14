@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/app_constants/app_colors.dart';
 import 'package:grocery_store/models/gridpage_model.dart';
-import 'package:grocery_store/models/product.dart';
 import 'package:grocery_store/ui/gridview_page/gridview_page.dart';
 
 class SectionItem extends StatelessWidget {
@@ -31,7 +30,7 @@ class SectionItem extends StatelessWidget {
             children: [
               Text(
                 sectionName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),
@@ -40,7 +39,7 @@ class SectionItem extends StatelessWidget {
                 onTap: (){
                   Navigator.pushNamed(context, GridviewPage.routeName, arguments: GridPageModel(title: sectionName, products: productsList));
                 },
-                child: Text("See all", style: TextStyle(
+                child: const Text("See all", style: TextStyle(
                   color: AppColors.mainGreen,
                   fontSize: 15,
                 ),),

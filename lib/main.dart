@@ -11,7 +11,6 @@ import 'package:grocery_store/providers/orders_provider.dart';
 import 'package:grocery_store/ui/auth_page/auth_screen.dart';
 import 'package:grocery_store/ui/cart_page/cart_page.dart';
 import 'package:grocery_store/ui/cart_page/success_page.dart';
-import 'package:grocery_store/ui/explore_page/explore_page.dart';
 import 'package:grocery_store/ui/gridview_page/gridview_page.dart';
 import 'package:grocery_store/ui/main_page.dart';
 import 'package:grocery_store/ui/no_internet.dart';
@@ -20,10 +19,6 @@ import 'package:grocery_store/ui/product_detail/product_detail.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-
-import 'app_constants/app_colors.dart';
-import 'app_constants/app_colors.dart';
-import 'ui/home_page/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,12 +70,12 @@ class GroceryStore extends StatelessWidget {
               primaryColor: Colors.white,
               primarySwatch: Colors.green,
               scaffoldBackgroundColor: Colors.white,
-              appBarTheme: AppBarTheme(
+              appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.white,
                 elevation: 1,
                 foregroundColor: Colors.black,
               ),
-              textTheme: TextTheme(
+              textTheme: const TextTheme(
                 titleMedium: TextStyle(
                   fontSize: 14,
                 ),
@@ -90,12 +85,12 @@ class GroceryStore extends StatelessWidget {
                 ? const MainPage()
                 : const AuthScreen(),
             routes: {
-              ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
-              GridviewPage.routeName: (context) => GridviewPage(),
-              OrdersPage.routeName: (context) => OrdersPage(),
-              CartPage.routeName: (context) => CartPage(),
-              NoInternet.routeName: (context) => NoInternet(),
-              SuccessPage.routeName: (context) => SuccessPage()
+              ProductDetailScreen.routeName: (context) => const ProductDetailScreen(),
+              GridviewPage.routeName: (context) => const GridviewPage(),
+              OrdersPage.routeName: (context) => const OrdersPage(),
+              CartPage.routeName: (context) => const CartPage(),
+              NoInternet.routeName: (context) => const NoInternet(),
+              SuccessPage.routeName: (context) => const SuccessPage()
             },
           );
         },

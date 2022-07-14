@@ -46,7 +46,7 @@ class CartPage extends StatelessWidget {
                         },
                         onRemove: () {
                           showDialog(context: context, builder: (context) => AlertDialog(
-                            title: Text('Do you want to delete this product?'),
+                            title: const Text('Do you want to delete this product?'),
                             actions: [
                               Column(
                                 children: [

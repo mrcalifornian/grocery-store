@@ -11,7 +11,7 @@ class CategoryShimmer extends StatelessWidget {
       baseColor: Colors.white60,
       highlightColor: backgroundColor,
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

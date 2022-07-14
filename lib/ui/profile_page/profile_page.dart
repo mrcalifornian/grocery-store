@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:grocery_store/app_constants/app_colors.dart';
 import 'package:grocery_store/providers/auth_provider.dart';
 import 'package:grocery_store/ui/profile_page/widgets/section_widget.dart';
-import 'package:grocery_store/ui/widgets/app_icon.dart';
 import 'package:provider/provider.dart';
 
 import '../orders_page/orders_page.dart';

@@ -10,7 +10,7 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -22,10 +22,10 @@ class CategoryItem extends StatelessWidget {
       child: Column(
         children: [
           Image.network(imageUrl, height: 100,),
-          Spacer(),
-          Text("${title}",
+          const Spacer(),
+          Text(title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 17
             ),),

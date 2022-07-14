@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/app_constants/app_colors.dart';
 import 'package:grocery_store/models/gridpage_model.dart';
 import 'package:grocery_store/models/product.dart';
-import 'package:grocery_store/providers/cart_provider.dart';
-import 'package:grocery_store/ui/cart_page/cart_page.dart';
-import 'package:grocery_store/ui/widgets/app_icon.dart';
 import 'package:grocery_store/ui/widgets/cart_icon.dart';
 import 'package:grocery_store/ui/widgets/product_item.dart';
-import 'package:provider/provider.dart';
 
 class GridviewPage extends StatelessWidget {
   static String routeName = "/gridview-page";
@@ -24,23 +19,23 @@ class GridviewPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
         ),
         title: Center(
           child: Text(
             items.title,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        actions: [
+        actions: const [
           CartIcon(),
         ],
       ),
       body: GridView.builder(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           itemCount: items.products.length,
-          padding: EdgeInsets.all(20),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          padding: const EdgeInsets.all(20),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 15,
             crossAxisSpacing: 15,

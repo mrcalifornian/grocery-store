@@ -1,12 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_store/app_constants/app_constants.dart';
 import 'package:grocery_store/providers/favourites_provider.dart';
 import 'package:grocery_store/ui/product_detail/product_detail.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
-
-import '../../models/product.dart';
 
 class FavouritesPage extends StatefulWidget {
   const FavouritesPage({Key? key}) : super(key: key);
@@ -107,10 +103,10 @@ class _FavouritesPageState extends State<FavouritesPage> {
                               fontSize: 17,
                             ),
                           ),
-                          SizedBox(width: 20,),
+                          const SizedBox(width: 20,),
                           GestureDetector(onTap: (){
                             favs.deleteProduct(index);
-                          }, child: Icon(Icons.delete_outline,))
+                          }, child: const Icon(Icons.delete_outline,))
                         ],
                       ),
                     ],

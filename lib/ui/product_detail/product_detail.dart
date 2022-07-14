@@ -4,11 +4,8 @@ import 'package:grocery_store/models/product.dart';
 import 'package:grocery_store/providers/favourites_provider.dart';
 import 'package:grocery_store/ui/product_detail/widgets/expandable_list_tile.dart';
 import 'package:grocery_store/ui/widgets/app_button.dart';
-import 'package:grocery_store/ui/widgets/app_icon.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
-import '../../app_constants/app_constants.dart';
 import '../../providers/cart_provider.dart';
 import '../widgets/cart_icon.dart';
 
@@ -29,20 +26,20 @@ class ProductDetailScreen extends StatelessWidget {
           SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 350,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: ListTile(
                     title: Text(
                       product.title,
                       style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
                       "${product.measure}, Price",
-                      style: TextStyle(color: Colors.black54),
+                      style: const TextStyle(color: Colors.black54),
                     ),
                     trailing: GestureDetector(
                         onTap: () async {
@@ -86,12 +83,12 @@ class ProductDetailScreen extends StatelessWidget {
                   sectionTitle: "Nutrition",
                   description: product.nutritons,
                   trailing: Container(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: AppColors.searchBarColor,
                     ),
-                    child: Text("100g"),
+                    child: const Text("100g"),
                   ),
                 ),
               ],
@@ -100,14 +97,14 @@ class ProductDetailScreen extends StatelessWidget {
           Container(
             height: 350,
             width: double.maxFinite,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(25),
                 bottomRight: Radius.circular(25),
               ),
               color: AppColors.searchBarColor,
             ),
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 40,
               vertical: 15,
             ),
@@ -117,7 +114,7 @@ class ProductDetailScreen extends StatelessWidget {
           ),
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 top: 10,
                 left: 20,
                 right: 10,
@@ -130,10 +127,10 @@ class ProductDetailScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(Icons.arrow_back_ios),
+                    child: const Icon(Icons.arrow_back_ios),
                   ),
-                  Spacer(),
-                  CartIcon(),
+                  const Spacer(),
+                  const CartIcon(),
                 ],
               ),
             ),
