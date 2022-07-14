@@ -2,20 +2,67 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:grocery_store/app_constants/app_constants.dart';
 import 'package:grocery_store/models/product.dart';
 import 'package:http/http.dart' as http;
 
 class HomeProvider with ChangeNotifier {
+  bool isLoading = true;
 
-  Future<void> checkInternet() async{
-    final url = Uri.parse("${AppConstants.baseUrl}products/recommended.json");
+  Future<void> getHomeProducts() async{
     try{
-      await http.get(url);
+      await getLocation();
+      await fetchBanners();
+      await fetchExclusiveProducts();
+      await fetchBestSellingProducts();
+      await fetchRecommendedGroceries();
+      isLoading = false;
+      notifyListeners();
     } on SocketException catch (error){
       throw error;
     }
   }
+
+
+  // get Location
+  String address = '';
+  bool isLoadingLocation = true;
+
+  Future<void> getLocation() async{
+    Position position = await _determinePosition();
+    List<Placemark>  placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
+    address = "${placemark[0].subAdministrativeArea}, ${placemark[0].administrativeArea}";
+    isLoadingLocation = false;
+    notifyListeners();
+  }
+
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.checkPermission();
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    return await Geolocator.getCurrentPosition();
+  }
+
+  // products section
 
   // Banners
   List _banners = [];

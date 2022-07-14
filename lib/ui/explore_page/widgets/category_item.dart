@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -21,7 +22,7 @@ class CategoryItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Image.network(imageUrl, height: 100,),
+          CachedNetworkImage(imageUrl: imageUrl, height: 100,),
           const Spacer(),
           Text(title,
             textAlign: TextAlign.center,

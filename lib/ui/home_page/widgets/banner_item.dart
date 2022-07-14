@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/app_constants/app_colors.dart';
@@ -15,35 +17,14 @@ class BannerItem extends StatefulWidget {
 }
 
 class _BannerItemState extends State<BannerItem> {
-  PageController pageController = PageController(viewportFraction: 1.0);
-  double _pageIndex = 0;
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    Future.delayed(Duration.zero).then((value) async {
-      await Provider.of<HomeProvider>(context, listen: false).fetchBanners();
-      setState(() {
-        isLoading = false;
-      });
-    }).catchError((error) => {
-      setState((){
-        isLoading = false;
-      }),
-    });
-    pageController.addListener(() {
-      setState(() {
-        _pageIndex = pageController.page!;
-      });
-    });
-    super.initState();
-  }
+  int _pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    final banners = Provider.of<HomeProvider>(context).banners;
+    final home = Provider.of<HomeProvider>(context);
+    final banners = home.banners;
     final length = banners.length;
-    return isLoading
+    return home.isLoading
         ? Container(
             margin: const EdgeInsets.symmetric(
               vertical: 10,
@@ -63,42 +44,43 @@ class _BannerItemState extends State<BannerItem> {
           )
         : Stack(
             children: [
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                height: 100,
-                child: PageView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    controller: pageController,
-                    itemCount: length,
-                    allowImplicitScrolling: true,
-                    padEnds: false,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        height: 100,
-                        width: double.maxFinite,
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              banners[index],
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    }),
+              CarouselSlider(
+                  items: banners
+                      .map((banner) => Builder(builder: (context) {
+                            return Container(
+                              height: 100,
+                              width: double.maxFinite,
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: CachedNetworkImage(
+                                  imageUrl: banner,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          }))
+                      .toList(),
+                  options: CarouselOptions(
+                    height: 100,
+                    viewportFraction: 1,
+                    autoPlay: true,
+                    onPageChanged: (index, A){
+                      setState((){
+                        _pageIndex = index;
+                      });
+                    }
+                  ),
               ),
               Container(
-                height: 110,
+                margin: const EdgeInsets.only(bottom: 5),
+                height: 100,
                 alignment: Alignment.bottomCenter,
                 child: DotsIndicator(
                   dotsCount: length,
-                  position: _pageIndex,
+                  position: double.parse("$_pageIndex"),
                   decorator: DotsDecorator(
                     color: Colors.grey,
                     activeColor: AppColors.mainGreen,

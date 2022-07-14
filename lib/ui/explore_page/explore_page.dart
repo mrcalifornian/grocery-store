@@ -18,28 +18,14 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
-  bool _error = false;
-  bool _isLoading = true;
+  // bool _error = false;
+  // bool _isLoading = true;
   bool _isTyping = false;
 
   TextEditingController _searchText = TextEditingController();
 
   @override
   void initState() {
-    Future.delayed(
-      Duration.zero,
-    ).then((value) async {
-      await Provider.of<CategoryProvider>(context, listen: false)
-          .getCategories();
-      setState(() {
-        _isLoading = false;
-      });
-    }).catchError((error) {
-      setState(() {
-        _error = true;
-        _isLoading = false;
-      });
-    });
     _searchText.addListener(() {
       setState(() {
         _isTyping = true;
@@ -112,13 +98,9 @@ class _ExplorePageState extends State<ExplorePage> {
           ),
         ),
       ),
-      body: _error
-          ? const Center(
-              child: Text('Something went wrong!'),
-            )
-          : Stack(
+      body:Stack(
               children: [
-                _isLoading
+                prod.isLoading
                     ? GridView.builder(
                         padding: const EdgeInsets.only(
                           left: 20,

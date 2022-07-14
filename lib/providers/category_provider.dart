@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:grocery_store/app_constants/app_constants.dart';
@@ -7,46 +8,53 @@ import 'package:http/http.dart' as http;
 import '../models/product.dart';
 
 class CategoryProvider with ChangeNotifier {
+
+  bool isLoading = true;
   List<CategoryModel> _categories = [];
 
   List get categories => _categories;
 
   Future<void> getCategories() async {
-    final url = Uri.parse(
-        "https://online-groceries-store-nbk-default-rtdb.firebaseio.com/products/categories.json?auth=${AppConstants.token}");
-    final response = await http.get(url);
-    List<CategoryModel> loadedData = [];
-    final extractedData = json.decode(response.body) as Map<String, dynamic>;
+    try {
+      final url = Uri.parse(
+          "https://online-groceries-store-nbk-default-rtdb.firebaseio.com/products/categories.json?auth=${AppConstants.token}");
+      final response = await http.get(url);
+      List<CategoryModel> loadedData = [];
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
 
-    if (extractedData.isEmpty) {
-      return;
+      if (extractedData.isEmpty) {
+        return;
+      }
+
+      extractedData.forEach((categoryID, category) {
+        loadedData.add(
+          CategoryModel(
+            categoryID: categoryID,
+            imageUrl: category['imageUrl'],
+            title: category['title'],
+            products: (category['products'] as List<dynamic>)
+                .map(
+                  (product) => Product(
+                    productID: product['id'],
+                    description: product['description'],
+                    imageUrl: product['imageUrl'],
+                    measure: product['measure'],
+                    nutritons: product['nutrition'],
+                    price: product['price'],
+                    title: product['title'],
+                  ),
+                )
+                .toList(),
+          ),
+        );
+      });
+      _categories = [];
+      _categories = loadedData;
+      isLoading = false;
+      notifyListeners();
+    } on SocketException catch (error) {
+      throw error;
     }
-
-    extractedData.forEach((categoryID, category) {
-      loadedData.add(
-        CategoryModel(
-          categoryID: categoryID,
-          imageUrl: category['imageUrl'],
-          title: category['title'],
-          products: (category['products'] as List<dynamic>)
-              .map(
-                (product) => Product(
-                  productID: product['id'],
-                  description: product['description'],
-                  imageUrl: product['imageUrl'],
-                  measure: product['measure'],
-                  nutritons: product['nutrition'],
-                  price: product['price'],
-                  title: product['title'],
-                ),
-              )
-              .toList(),
-        ),
-      );
-    });
-    _categories = [];
-    _categories = loadedData;
-    notifyListeners();
   }
 
   List<Product> _products = [];

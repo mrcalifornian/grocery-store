@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_store/app_constants/app_colors.dart';
 
 import '../orders_page/orders_page.dart';
 import '../widgets/app_button.dart';
@@ -42,13 +43,33 @@ class SuccessPage extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(context, OrdersPage.routeName);
                 }),
-            AppButton(
-                height: 60,
-                color: Colors.white,
-                name: 'Home',
+            Container(
+              height: 45,
+              margin:  const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 15,
+              ),
+              child: GestureDetector(
                 onTap: () {
                   Navigator.pushReplacementNamed(context, '/');
-                }),
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(width: 1,),
+                    color: Colors.white,
+                  ),
+                  child: const Text(
+                    'Home',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

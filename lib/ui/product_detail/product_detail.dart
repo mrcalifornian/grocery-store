@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/app_constants/app_colors.dart';
 import 'package:grocery_store/models/product.dart';
@@ -108,9 +109,7 @@ class ProductDetailScreen extends StatelessWidget {
               horizontal: 40,
               vertical: 15,
             ),
-            child: Image.network(
-              product.imageUrl,
-            ),
+            child: CachedNetworkImage(imageUrl: product.imageUrl),
           ),
           SafeArea(
             child: Padding(
