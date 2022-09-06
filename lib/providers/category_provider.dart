@@ -51,6 +51,7 @@ class CategoryProvider with ChangeNotifier {
       _categories = [];
       _categories = loadedData;
       isLoading = false;
+      addProduct();
       notifyListeners();
     } on SocketException catch (error) {
       throw error;
@@ -71,7 +72,7 @@ class CategoryProvider with ChangeNotifier {
   List<Product> searchedProducts = [];
 
   void searchProducts(String detail) {
-    searchedProducts = [];
+    emptyList();
     searchedProducts.addAll(
       _products.where(
         (prod) => prod.title.toLowerCase().contains(detail.toLowerCase()),

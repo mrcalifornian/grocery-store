@@ -70,6 +70,8 @@ class AuthProvider with ChangeNotifier {
       notifyListeners();
 
       final authData = jsonEncode({
+        'email': email,
+        'password': password,
         'token': _token,
         'userID': _userID,
         'expiryDate': _expiryDate?.toIso8601String(),
@@ -116,11 +118,18 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void _autoLogOut(){
+   Future<void> _refreshToken() {
+    final data = jsonDecode(authBox.get('authData')!);
+    final email = data['email'];
+    final password = data['password'];
+    return _authenticate(email, password, AppConstants.signIn);
+  }
+
+  void _autoLogOut() {
     if(_authTimer != null){
       _authTimer!.cancel();
     }
     final expiryTime = _expiryDate!.difference(DateTime.now()).inSeconds;
-    _authTimer = Timer(Duration(seconds: expiryTime), logOut);
+    _authTimer = Timer(Duration(seconds: expiryTime), _refreshToken);
   }
 }

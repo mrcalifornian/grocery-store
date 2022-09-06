@@ -13,7 +13,6 @@ class HomeProvider with ChangeNotifier {
 
   Future<void> getHomeProducts() async{
     try{
-      await getLocation();
       await fetchBanners();
       await fetchExclusiveProducts();
       await fetchBestSellingProducts();
@@ -27,23 +26,15 @@ class HomeProvider with ChangeNotifier {
 
 
   // get Location
-  String address = '';
+  String address = 'Permissions denied';
   bool isLoadingLocation = true;
-
-  Future<void> getLocation() async{
-    Position position = await _determinePosition();
-    List<Placemark>  placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
-    address = "${placemark[0].subAdministrativeArea}, ${placemark[0].administrativeArea}";
-    isLoadingLocation = false;
-    notifyListeners();
-  }
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      await Geolocator.checkPermission();
+      await Geolocator.requestPermission();
       return Future.error('Location services are disabled.');
     }
 
@@ -60,6 +51,18 @@ class HomeProvider with ChangeNotifier {
           'Location permissions are permanently denied, we cannot request permissions.');
     }
     return await Geolocator.getCurrentPosition();
+  }
+
+  Future<void> getLocation() async{
+    try{
+      Position position = await _determinePosition();
+      List<Placemark>  placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
+      address = "${placemark[0].subAdministrativeArea}, ${placemark[0].administrativeArea}";
+      isLoadingLocation = false;
+      notifyListeners();
+    } catch (error){
+      print(error);
+    }
   }
 
   // products section

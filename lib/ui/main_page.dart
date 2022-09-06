@@ -26,12 +26,12 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     Future.delayed(Duration.zero).then((value) async {
+      await Provider.of<HomeProvider>(context, listen: false).getLocation();
       await Provider.of<HomeProvider>(context, listen: false).getHomeProducts();
-    }).then((value) async {
-      await Provider.of<CategoryProvider>(context, listen: false)
-          .getCategories();
-    }).catchError((_) {
-      Navigator.pushReplacementNamed(context, NoInternet.routeName);
+      await Provider.of<CategoryProvider>(context, listen: false).getCategories();
+    }).catchError((e) {
+      Future.delayed(const Duration(seconds: 5)).then((value) =>
+          Navigator.pushReplacementNamed(context, NoInternet.routeName));
     });
     super.initState();
   }

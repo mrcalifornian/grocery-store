@@ -203,7 +203,6 @@ class _ExplorePageState extends State<ExplorePage> {
                   child: TextField(
                     keyboardType: TextInputType.text,
                     controller: _searchText,
-                    onTap: () => prod.addProduct(),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
