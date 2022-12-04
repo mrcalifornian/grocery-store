@@ -6,4 +6,4 @@ Covered areas:
 3. HIVE (CRUD)
 4. User Authentication using email & password
 
-Project has been created by Nodirbek Tojiboev
+Project was developed by Nodirbek Tojiboev
