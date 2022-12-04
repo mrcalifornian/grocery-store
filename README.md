@@ -1,4 +1,4 @@
-This is the complete Online Marketplace.
+This project is called "Grocery Store" that I built using Flutter SDK as a pet project.
 Provider was used as a state management tool.
 Covered areas:
 1. State Management using Provider
